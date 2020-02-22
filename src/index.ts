@@ -6,10 +6,8 @@ const app = express().get('/day', async (_, res) => {
   const client = await pool.connect()
 
   try {
-    const {
-      rows: [emoji],
-    } = await client.query(
-      'SELECT character, name FROM emojis WHERE type = "day" LIMIT 1'
+    const { rows: [emoji] = [] } = await client.query(
+      `SELECT character, name, type FROM emojis WHERE type = 'day' LIMIT 1`
     )
 
     res.end(JSON.stringify(emoji))
