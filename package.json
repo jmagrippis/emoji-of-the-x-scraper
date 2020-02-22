@@ -4,7 +4,7 @@
   "description": "Scrapes emoji to append to the emoji-of-the-x database",
   "main": "src/index.ts",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "yarn knex migrate:latest && ts-node src/index.ts",
     "pick": "ts-node src/tasks/pick.ts",
     "test": "jest"
   },
@@ -16,6 +16,7 @@
     "@types/node-fetch": "^2.5.4",
     "@types/pg": "^7.14.1",
     "express": "^5.0.0-0",
+    "knex": "^0.20.10",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "pg": "^7.18.2",
