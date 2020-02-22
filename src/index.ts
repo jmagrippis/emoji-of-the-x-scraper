@@ -8,10 +8,10 @@ const app = express().get('/day', async (_, res) => {
 
   try {
     const { rows: [emoji] = [] } = await client.query(
-      `SELECT character, name, type FROM emojis WHERE type = '${EmojiType.day}' LIMIT 1`
+      `SELECT character, name FROM emojis WHERE emojis.type = '${EmojiType.day}' ORDER BY created_at DESC LIMIT 1`
     )
 
-    res.end(JSON.stringify(emoji))
+    res.json(emoji)
   } catch (err) {
     console.error(err)
 
