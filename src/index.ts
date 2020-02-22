@@ -1,5 +1,6 @@
 import express from 'express'
 
+import { EmojiType } from './constants'
 import { pool } from './pool'
 
 const app = express().get('/day', async (_, res) => {
@@ -7,7 +8,7 @@ const app = express().get('/day', async (_, res) => {
 
   try {
     const { rows: [emoji] = [] } = await client.query(
-      `SELECT character, name, type FROM emojis WHERE type = 'day' LIMIT 1`
+      `SELECT character, name, type FROM emojis WHERE type = '${EmojiType.day}' LIMIT 1`
     )
 
     res.end(JSON.stringify(emoji))
