@@ -20,6 +20,11 @@ export const dayHandler = async (
 
     switch (rows.length) {
       case 3:
+        if (anchor) {
+          res.set('Cache-Control', 'public, max-age=31557600')
+        } else {
+          res.set('Cache-Control', 'public, max-age=3600')
+        }
         res.json({
           previous: third,
           current: second,
@@ -27,6 +32,7 @@ export const dayHandler = async (
         })
         return
       case 2:
+        res.set('Cache-Control', 'public, max-age=3600')
         if (
           !anchor ||
           new Date(anchor).getDay() === new Date(first.created_at).getDay()
@@ -43,6 +49,7 @@ export const dayHandler = async (
         })
         return
       case 1:
+        res.set('Cache-Control', 'public, max-age=3600')
         res.json({
           current: first,
         })
