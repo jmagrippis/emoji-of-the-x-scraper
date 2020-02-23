@@ -27,7 +27,10 @@ export const dayHandler = async (
         })
         return
       case 2:
-        if (new Date().getDay() === new Date(first).getDay()) {
+        if (
+          !anchor ||
+          new Date(anchor).getDay() === new Date(first.created_at).getDay()
+        ) {
           res.json({
             previous: second,
             current: first,

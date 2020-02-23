@@ -8,7 +8,8 @@ export const dayHandler = async (_, res: Response) => {
 
   try {
     const { rows: [emoji] = [] } = await client.query(
-      `SELECT character, name FROM emojis WHERE emojis.type = '${EmojiType.day}' ORDER BY created_at DESC LIMIT 1`
+      `SELECT character, name, created_at FROM emojis
+      WHERE emojis.type = '${EmojiType.day}' ORDER BY created_at DESC LIMIT 1`
     )
     res.json(emoji)
   } catch (err) {

@@ -3,10 +3,10 @@ import { PoolClient } from 'pg'
 import { getStartAndEnd } from './getStartAndEnd'
 import { EmojiType } from '../constants'
 
-const SQL = `SELECT character, name FROM emojis
+const SQL = `SELECT character, name, created_at FROM emojis
 WHERE emojis.type = $1
-AND emojis.created_at BETWEEN $2 AND $3
-ORDER BY emojis.created_at DESC LIMIT 3`
+AND created_at BETWEEN $2 AND $3
+ORDER BY created_at DESC LIMIT 3`
 
 export const getEmojisAroundAnchor = async (
   { anchor, type }: { anchor: string; type: EmojiType },
