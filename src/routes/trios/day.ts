@@ -1,19 +1,23 @@
-import { Response } from 'express'
+import { Response, Request } from 'express'
 
 import { EmojiType } from '../../constants'
 import { pool } from '../../pool'
+import { getEmojisAroundAnchor } from '../../db/getEmojisAroundAnchor'
 
-export const dayHandler = async (_, res: Response) => {
+export const dayHandler = async (
+  { query: { anchor } }: Request,
+  res: Response
+) => {
   const client = await pool.connect()
 
   try {
-    const { rows } = await client.query(
-      `SELECT character, name FROM emojis
-      WHERE emojis.type = '${EmojiType.day}'
-      AND emojis.created_at BETWEEN date_trunc('day', now()) - interval '1 day' AND date_trunc('day', now()) + interval '2 days' - interval '1 second'
-      ORDER BY emojis.created_at DESC LIMIT 3`
+    const rows = await getEmojisAroundAnchor(
+      { anchor, type: EmojiType.day },
+      client
     )
+
     const [first, second, third] = rows
+
     switch (rows.length) {
       case 3:
         res.json({
