@@ -9,7 +9,7 @@ export const countEmojiOfTheX = async (
   const {
     rows: [{ count }],
   } = await client.query(
-    `SELECT count(*) from emojis WHERE type='${x}' AND extract(${x} FROM emojis.created_at) = extract(${x} from now())`
+    `SELECT count(*) from emojis WHERE type='${x}' AND extract(${x} FROM emojis.created_at) = extract(${x} from now()) AND emojis.created_at > now() - interval '2 ${x}'`
   )
 
   return parseInt(count)
