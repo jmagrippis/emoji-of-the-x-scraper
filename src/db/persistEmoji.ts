@@ -1,6 +1,5 @@
 import { PoolClient } from 'pg'
-
-import { Emoji } from '../constants'
+import { Emoji } from '../generated/graphql'
 
 const SQL = 'INSERT INTO emojis(character, name, type) VALUES($1, $2, $3)'
 

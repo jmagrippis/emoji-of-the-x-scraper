@@ -1,6 +1,6 @@
 import { PoolClient } from 'pg'
 
-import { EmojiType } from '../constants'
+import { EmojiType } from '../generated/graphql'
 
 export const countEmojiOfTheX = async (
   x: EmojiType,

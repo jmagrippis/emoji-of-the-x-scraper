@@ -1,10 +1,10 @@
 import { sample } from 'lodash'
 
 import { pool } from '../pool'
-import { EmojiType } from '../constants'
 import { fetchEmojis } from '../fetchEmojis'
 import { countEmojiOfTheX } from '../db/countEmojiOfTheX'
 import { persistEmoji } from '../db/persistEmoji'
+import { EmojiType } from '../generated/graphql'
 
 fetchEmojis().then(async emojis => {
   const client = await pool.connect()
@@ -15,23 +15,23 @@ fetchEmojis().then(async emojis => {
       emojiOfThisWeekCount,
       emojiOfThisMonthCount,
     ] = await Promise.all([
-      countEmojiOfTheX(EmojiType.day, client),
-      countEmojiOfTheX(EmojiType.week, client),
-      countEmojiOfTheX(EmojiType.month, client),
+      countEmojiOfTheX(EmojiType.Day, client),
+      countEmojiOfTheX(EmojiType.Week, client),
+      countEmojiOfTheX(EmojiType.Month, client),
     ])
 
     if (!emojiOfThisDayCount) {
-      const emoji = { ...sample(emojis), type: EmojiType.day }
+      const emoji = { ...sample(emojis), type: EmojiType.Day }
       await persistEmoji(emoji, client)
       console.log(`pick of the day: ${emoji.character}`)
     }
     if (!emojiOfThisWeekCount) {
-      const emoji = { ...sample(emojis), type: EmojiType.week }
+      const emoji = { ...sample(emojis), type: EmojiType.Week }
       await persistEmoji(emoji, client)
       console.log(`pick of the week: ${emoji.character}`)
     }
     if (!emojiOfThisMonthCount) {
-      const emoji = { ...sample(emojis), type: EmojiType.month }
+      const emoji = { ...sample(emojis), type: EmojiType.Month }
       await persistEmoji(emoji, client)
       console.log(`pick of the month: ${emoji.character}`)
     }

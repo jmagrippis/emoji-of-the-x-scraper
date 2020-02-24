@@ -1,7 +1,7 @@
 import { PoolClient } from 'pg'
 
 import { getStartAndEnd } from './getStartAndEnd'
-import { EmojiType } from '../constants'
+import { EmojiType } from '../generated/graphql'
 
 const SQL = `SELECT character, name, created_at FROM emojis
 WHERE emojis.type = $1

@@ -1,13 +1,13 @@
 import { pool } from '../pool'
 import { getEmojisAroundAnchor } from '../db/getEmojisAroundAnchor'
-import { EmojiType } from '../constants'
+import { QueryResolvers, EmojiType } from '../generated/graphql'
 
-export const trio = async (_, { anchor }) => {
+export const trio: QueryResolvers['trio'] = async (_, { anchor }) => {
   const client = await pool.connect()
 
   try {
     const rows = await getEmojisAroundAnchor(
-      { anchor, type: EmojiType.day },
+      { anchor, type: EmojiType.Day },
       client
     )
 
