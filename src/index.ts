@@ -1,16 +1,10 @@
-import express from 'express'
-import cors from 'cors'
+import { ApolloServer } from 'apollo-server'
 
-import { dayHandler } from './routes/day'
-import { triosRouter } from './routes/trios/router'
+import { typeDefs } from './typeDefs'
+import { resolvers } from './resolvers'
 
-const app = express()
-  .use(cors())
-  .get('/day', dayHandler)
-  .use('/trios', triosRouter)
+const server = new ApolloServer({ typeDefs, resolvers })
 
-const PORT = process.env.PORT || 3400
-
-app.listen(PORT, () => {
-  console.log('listening on port', PORT)
+server.listen().then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`)
 })
