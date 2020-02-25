@@ -3,8 +3,8 @@ import { PoolClient } from 'pg'
 import { getStartAndEnd } from './getStartAndEnd'
 import { EmojiType } from '../generated/graphql'
 
-const SQL = `SELECT character, name, created_at FROM emojis
-WHERE emojis.type = $1
+const SQL = `SELECT id, character, name, created_at, type FROM emojis
+WHERE type = $1
 AND created_at BETWEEN $2 AND $3
 ORDER BY created_at DESC LIMIT 3`
 
