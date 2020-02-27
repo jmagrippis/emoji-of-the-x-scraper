@@ -1,6 +1,7 @@
 import { emoji } from './emoji'
 import { emojis } from './emojis'
 import { trio } from './trio'
+import { hashtags } from './hashtags'
 import { Resolvers } from '../generated/graphql'
 
 export const resolvers: Resolvers = {
@@ -8,5 +9,6 @@ export const resolvers: Resolvers = {
     emoji,
     emojis,
     trio,
+    hashtags,
   },
 }

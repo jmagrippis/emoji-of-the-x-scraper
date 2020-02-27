@@ -44,6 +44,7 @@ export type Query = {
   emoji?: Maybe<Emoji>
   emojis: Array<Emoji>
   trio: Trio
+  hashtags: Array<Scalars['String']>
 }
 
 export type QueryEmojiArgs = {
@@ -235,6 +236,7 @@ export type QueryResolvers<
     ContextType,
     QueryTrioArgs
   >
+  hashtags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>
 }
 
 export type TrioResolvers<
