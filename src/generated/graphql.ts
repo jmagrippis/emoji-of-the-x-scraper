@@ -4,6 +4,10 @@ import {
   GraphQLScalarTypeConfig,
 } from 'graphql'
 export type Maybe<T> = T | null
+export type RequireFields<T, K extends keyof T> = {
+  [X in Exclude<keyof T, K>]?: T[X]
+} &
+  { [P in K]-?: NonNullable<T[P]> }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string
@@ -25,25 +29,36 @@ export type Emoji = {
   character: Scalars['String']
   name: Scalars['String']
   created_at: Scalars['String']
+  anchor: Scalars['String']
   type: EmojiType
 }
 
 export enum EmojiType {
-  Hour = 'hour',
   Day = 'day',
   Week = 'week',
   Month = 'month',
-  Year = 'year',
 }
 
 export type Query = {
   __typename?: 'Query'
+  emoji?: Maybe<Emoji>
+  emojis: Array<Emoji>
   trio: Trio
+}
+
+export type QueryEmojiArgs = {
+  id: Scalars['ID']
+  type: EmojiType
+}
+
+export type QueryEmojisArgs = {
+  anchor?: Maybe<Scalars['String']>
+  type: EmojiType
 }
 
 export type QueryTrioArgs = {
   anchor?: Maybe<Scalars['String']>
-  type?: Maybe<Scalars['String']>
+  type?: Maybe<EmojiType>
 }
 
 export type Trio = {
@@ -162,11 +177,11 @@ export type DirectiveResolverFn<
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>
-  String: ResolverTypeWrapper<Scalars['String']>
-  Trio: ResolverTypeWrapper<Trio>
-  Emoji: ResolverTypeWrapper<Emoji>
   ID: ResolverTypeWrapper<Scalars['ID']>
   EmojiType: EmojiType
+  Emoji: ResolverTypeWrapper<Emoji>
+  String: ResolverTypeWrapper<Scalars['String']>
+  Trio: ResolverTypeWrapper<Trio>
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>
   CacheControlScope: CacheControlScope
   Upload: ResolverTypeWrapper<Scalars['Upload']>
@@ -175,11 +190,11 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Query: {}
-  String: Scalars['String']
-  Trio: Trio
-  Emoji: Emoji
   ID: Scalars['ID']
   EmojiType: EmojiType
+  Emoji: Emoji
+  String: Scalars['String']
+  Trio: Trio
   Boolean: Scalars['Boolean']
   CacheControlScope: CacheControlScope
   Upload: Scalars['Upload']
@@ -193,6 +208,7 @@ export type EmojiResolvers<
   character?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   created_at?: Resolver<ResolversTypes['String'], ParentType, ContextType>
+  anchor?: Resolver<ResolversTypes['String'], ParentType, ContextType>
   type?: Resolver<ResolversTypes['EmojiType'], ParentType, ContextType>
   __isTypeOf?: isTypeOfResolverFn<ParentType>
 }
@@ -201,6 +217,18 @@ export type QueryResolvers<
   ContextType = any,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']
 > = {
+  emoji?: Resolver<
+    Maybe<ResolversTypes['Emoji']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryEmojiArgs, 'id' | 'type'>
+  >
+  emojis?: Resolver<
+    Array<ResolversTypes['Emoji']>,
+    ParentType,
+    ContextType,
+    RequireFields<QueryEmojisArgs, 'type'>
+  >
   trio?: Resolver<
     ResolversTypes['Trio'],
     ParentType,

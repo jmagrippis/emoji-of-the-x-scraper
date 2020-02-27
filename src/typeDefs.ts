@@ -2,11 +2,9 @@ import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
   enum EmojiType {
-    hour
     day
     week
     month
-    year
   }
 
   type Emoji @cacheControl(maxAge: 2628000) {
@@ -14,6 +12,7 @@ export const typeDefs = gql`
     character: String!
     name: String!
     created_at: String!
+    anchor: String!
     type: EmojiType!
   }
 
@@ -24,6 +23,8 @@ export const typeDefs = gql`
   }
 
   type Query {
-    trio(anchor: String, type: String): Trio!
+    emoji(id: ID!, type: EmojiType!): Emoji
+    emojis(anchor: String, type: EmojiType!): [Emoji!]!
+    trio(anchor: String, type: EmojiType): Trio!
   }
 `

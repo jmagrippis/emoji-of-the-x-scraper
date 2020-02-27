@@ -5,6 +5,6 @@ import { resolvers } from './resolvers'
 
 const server = new ApolloServer({ typeDefs, resolvers, introspection: true })
 
-server.listen(process.env.PORT).then(({ url }) => {
+server.listen(process.env.PORT || 3400).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`)
 })
