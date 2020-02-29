@@ -43,7 +43,6 @@ export type Query = {
   __typename?: 'Query'
   emoji?: Maybe<Emoji>
   emojis: Array<Emoji>
-  trio: Trio
   latestPicks: Array<Emoji>
   hashtags: Array<Scalars['String']>
 }
@@ -56,18 +55,6 @@ export type QueryEmojiArgs = {
 export type QueryEmojisArgs = {
   anchor?: Maybe<Scalars['String']>
   type: EmojiType
-}
-
-export type QueryTrioArgs = {
-  anchor?: Maybe<Scalars['String']>
-  type?: Maybe<EmojiType>
-}
-
-export type Trio = {
-  __typename?: 'Trio'
-  current: Emoji
-  previous?: Maybe<Emoji>
-  next?: Maybe<Emoji>
 }
 
 export type ResolverTypeWrapper<T> = Promise<T> | T
@@ -183,7 +170,6 @@ export type ResolversTypes = {
   EmojiType: EmojiType
   Emoji: ResolverTypeWrapper<Emoji>
   String: ResolverTypeWrapper<Scalars['String']>
-  Trio: ResolverTypeWrapper<Trio>
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>
   CacheControlScope: CacheControlScope
   Upload: ResolverTypeWrapper<Scalars['Upload']>
@@ -196,7 +182,6 @@ export type ResolversParentTypes = {
   EmojiType: EmojiType
   Emoji: Emoji
   String: Scalars['String']
-  Trio: Trio
   Boolean: Scalars['Boolean']
   CacheControlScope: CacheControlScope
   Upload: Scalars['Upload']
@@ -231,28 +216,12 @@ export type QueryResolvers<
     ContextType,
     RequireFields<QueryEmojisArgs, 'type'>
   >
-  trio?: Resolver<
-    ResolversTypes['Trio'],
-    ParentType,
-    ContextType,
-    QueryTrioArgs
-  >
   latestPicks?: Resolver<
     Array<ResolversTypes['Emoji']>,
     ParentType,
     ContextType
   >
   hashtags?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>
-}
-
-export type TrioResolvers<
-  ContextType = any,
-  ParentType extends ResolversParentTypes['Trio'] = ResolversParentTypes['Trio']
-> = {
-  current?: Resolver<ResolversTypes['Emoji'], ParentType, ContextType>
-  previous?: Resolver<Maybe<ResolversTypes['Emoji']>, ParentType, ContextType>
-  next?: Resolver<Maybe<ResolversTypes['Emoji']>, ParentType, ContextType>
-  __isTypeOf?: isTypeOfResolverFn<ParentType>
 }
 
 export interface UploadScalarConfig
@@ -263,7 +232,6 @@ export interface UploadScalarConfig
 export type Resolvers<ContextType = any> = {
   Emoji?: EmojiResolvers<ContextType>
   Query?: QueryResolvers<ContextType>
-  Trio?: TrioResolvers<ContextType>
   Upload?: GraphQLScalarType
 }
 

@@ -16,16 +16,9 @@ export const typeDefs = gql`
     type: EmojiType!
   }
 
-  type Trio @cacheControl(maxAge: 3600) {
-    current: Emoji!
-    previous: Emoji
-    next: Emoji
-  }
-
   type Query {
     emoji(id: ID!, type: EmojiType!): Emoji
     emojis(anchor: String, type: EmojiType!): [Emoji!]!
-    trio(anchor: String, type: EmojiType): Trio!
     latestPicks: [Emoji!]! @cacheControl(maxAge: 3600)
     hashtags: [String!]! @cacheControl(maxAge: 3600)
   }
