@@ -7,7 +7,7 @@ export const typeDefs = gql`
     month
   }
 
-  type Emoji @cacheControl(maxAge: 2628000) {
+  type Emoji @cacheControl(maxAge: 2592000) {
     id: ID!
     character: String!
     name: String!
@@ -19,6 +19,7 @@ export const typeDefs = gql`
   type Query {
     emoji(id: ID!, type: EmojiType!): Emoji
     emojis(anchor: String, type: EmojiType!): [Emoji!]!
+      @cacheControl(maxAge: 3600)
     latestPicks: [Emoji!]! @cacheControl(maxAge: 3600)
     hashtags: [String!]! @cacheControl(maxAge: 3600)
   }
