@@ -2,6 +2,7 @@
   "compilerOptions": {
     "lib": ["es2020.string"],
     "downlevelIteration": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "target": "ESNext"
   }
 }

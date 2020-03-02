@@ -1,20 +1,20 @@
 import { sample } from 'lodash'
 
 import { pool } from '../pool'
-import { fetchEmojis } from '../fetchEmojis'
 import { countEmojiOfTheX } from '../db/countEmojiOfTheX'
 import { persistEmoji } from '../db/persistEmoji'
+import { getEmojisList } from '../db/getEmojisList'
 import { EmojiType } from '../generated/graphql'
 
-fetchEmojis().then(async emojis => {
-  const client = await pool.connect()
-
+pool.connect().then(async client => {
   try {
     const [
+      emojis,
       emojiOfThisDayCount,
       emojiOfThisWeekCount,
       emojiOfThisMonthCount,
     ] = await Promise.all([
+      getEmojisList(client),
       countEmojiOfTheX(EmojiType.Day, client),
       countEmojiOfTheX(EmojiType.Week, client),
       countEmojiOfTheX(EmojiType.Month, client),
