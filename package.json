@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "yarn knex migrate:latest && ts-node src/index.ts",
+    "scrape": "ts-node src/tasks/scrape.ts",
     "pick": "ts-node src/tasks/pick.ts",
     "test": "jest",
     "codegen": "graphql-codegen --config codegen.yml"

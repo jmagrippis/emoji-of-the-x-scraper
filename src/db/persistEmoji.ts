@@ -1,4 +1,5 @@
 import { PoolClient } from 'pg'
+
 import { Emoji } from '../generated/graphql'
 
 export const persistEmoji = (
