@@ -25,19 +25,19 @@ pool.connect().then(async client => {
       const emoji = { ...sample(emojis), type: EmojiType.Day }
       await persistEmoji(emoji, client)
       console.log(`pick of the day: ${emoji.character}`)
-      tweetEmoji(emoji)
+      await tweetEmoji(emoji)
     }
     if (!emojiOfThisWeekCount) {
       const emoji = { ...sample(emojis), type: EmojiType.Week }
       await persistEmoji(emoji, client)
       console.log(`pick of the week: ${emoji.character}`)
-      tweetEmoji(emoji)
+      await tweetEmoji(emoji)
     }
     if (!emojiOfThisMonthCount) {
       const emoji = { ...sample(emojis), type: EmojiType.Month }
       await persistEmoji(emoji, client)
       console.log(`pick of the month: ${emoji.character}`)
-      tweetEmoji(emoji)
+      await tweetEmoji(emoji)
     }
   } catch (err) {
     console.error(err.stack)
