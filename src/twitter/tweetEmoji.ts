@@ -20,7 +20,7 @@ const getHashtag = ({
 export const tweetEmoji = (
   emoji: Pick<Emoji, 'character' | 'name' | 'type'>
 ) => {
-  const status = `The emoji of the day is ${emoji.character}! Let "${
+  const status = `The emoji of the ${emoji.type} is ${emoji.character}! Let "${
     emoji.name
   }" guide you and share your own content with ${getHashtag(emoji)}`
 

@@ -14,6 +14,7 @@ describe('tweetEmoji', () => {
     }
     tweetEmoji(emoji)
 
+    expect(tweet).toBeCalledWith(expect.stringContaining('day'))
     expect(tweet).toBeCalledWith(expect.stringContaining('🦴'))
     expect(tweet).toBeCalledWith(expect.stringContaining('bone'))
     expect(tweet).toBeCalledWith(expect.stringContaining('#emoji_otd_🦴'))
@@ -27,6 +28,7 @@ describe('tweetEmoji', () => {
     }
     tweetEmoji(emoji)
 
+    expect(tweet).toBeCalledWith(expect.stringContaining('week'))
     expect(tweet).toBeCalledWith(expect.stringContaining('👹'))
     expect(tweet).toBeCalledWith(expect.stringContaining('ogre'))
     expect(tweet).toBeCalledWith(expect.stringContaining('#emoji_otw_👹'))
@@ -40,6 +42,7 @@ describe('tweetEmoji', () => {
     }
     tweetEmoji(emoji)
 
+    expect(tweet).toBeCalledWith(expect.stringContaining('month'))
     expect(tweet).toBeCalledWith(expect.stringContaining('👳‍♀️'))
     expect(tweet).toBeCalledWith(
       expect.stringContaining('person wearing turban')
