@@ -20,7 +20,7 @@
     "apollo-server": "^2.10.1",
     "apollo-server-plugin-response-cache": "^0.3.11",
     "graphql": "^14.6.0",
-    "knex": "^0.20.10",
+    "knex": "^2.4.0",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
     "oauth-1.0a": "^2.2.6",
